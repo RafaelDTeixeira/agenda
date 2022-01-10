@@ -1,4 +1,19 @@
 body{
-    background-color: blanchedalmond;
+    background-color: rgb(99, 130, 143);
     color: blue;
+}
+#lista{
+    background-color: cornflowerblue;
+    color: rgb(42, 6, 141);
+    text-justify: auto;
+    text-decoration: underline;
+    padding: 20px;
+    margin: 10px;
+    
+}
+.tabela{
+    margin: 10px;
+    padding: 20px;
+    color: chartreuse;
+    background: chocolate;
 }
