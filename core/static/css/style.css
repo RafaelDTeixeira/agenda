@@ -3,17 +3,6 @@ body{
     color: blue;
 }
 #lista{
-    background-color: cornflowerblue;
-    color: rgb(42, 6, 141);
+    color: rgb(38, 31, 85);
     text-justify: auto;
-    text-decoration: underline;
-    padding: 20px;
-    margin: 10px;
-    
-}
-.tabela{
-    margin: 10px;
-    padding: 20px;
-    color: chartreuse;
-    background: chocolate;
 }
