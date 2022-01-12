@@ -1,8 +1,14 @@
 body{
-    background-color: rgb(99, 130, 143);
-    color: blue;
+    
 }
 #lista{
-    color: rgb(38, 31, 85);
+    
     text-justify: auto;
+}
+#login{
+    padding: 15px;
+    margin: 15px;
+    padding-top: 100px;
+    
+    width: 35%;    
 }
