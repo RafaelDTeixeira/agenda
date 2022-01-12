@@ -17,6 +17,27 @@ def agendamento(resquest):
     dados={'eventos':evento,'usuario':usuario}
     return render(resquest,'agenda.html',dados)
 
+@login_required(login_url='/login/')
+def evento(request):
+    return render(request,'evento.html')
+
+@login_required(login_url='/login/')
+def evento_submit(request):
+    if request.POST:
+        titulo=request.POST.get('titulo')
+        data_evento=request.POST.get('data_evento')    
+        descricao=request.POST.get('descricao')
+        usuario=request.user
+        try:
+            Evento.objects.update_or_create(titulo=titulo,
+                                            data_evento=data_evento,
+                                            descricao=descricao,
+                                            usuario=usuario)
+        except ConnectionRefusedError:
+            messages.error(request,'Falha na solicitação.')
+            return redirect('agenda/evento')
+    
+    return redirect('/agenda')
 
 def titulo(resquest,titulo_evento):
     print(titulo_evento)

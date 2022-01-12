@@ -1,14 +1,21 @@
 body{
-    
+    min-width: 600px;    
 }
 #lista{
     
     text-justify: auto;
 }
-#login{
+#login, #form{
     padding: 15px;
     margin: 15px;
-    padding-top: 100px;
-    
-    width: 35%;    
+    padding-top: 100px;    
+    width: 35%;
+}
+#evento{
+    padding: 15px;
+    text-align: center;
+    color: orangered;
+}
+#footer{
+    padding-top: 50px;
 }

@@ -24,8 +24,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('agenda/', views.agendamento,name='agendamento'),
     path('agenda/titulo/<titulo_evento>/', views.titulo,name='titulo'),
+    path('agenda/evento/',views.evento),
     path('',views.index,name='index'),
     path('login/',views.login_user),
     path('login/submit',views.submit_login),
-    path('logout',views.logout_user)
+    path('logout',views.logout_user),
+    path('agenda/evento/submit',views.evento_submit)
 ]

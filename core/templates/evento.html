@@ -1,0 +1,32 @@
+{% extends 'model-page.html' %}
+
+{% block content %}
+    
+    <div id="evento" align="center">
+        <h2>Inserir dados</h2>
+    </div>
+    <div align="center">
+        <form action="submit" style="width: 35%;" method="post">{% csrf_token %}
+            <label class="sr-only">Título</label>
+            <input type="text" name="titulo" class="form-control" placeholder="titulo" required autofocus>
+            <label class="sr-only">Data do evento</label>
+            <input type="datetime-local" name="data_evento" id="data_evento" class="form-control" placeholder="Data do evento" required>
+            <div class="mb-3">
+                <label  class="form-label">Descrição</label>
+                <textarea class="form-control" name="descricao" id="descricao" rows="3"></textarea>
+            </div>
+            <br>
+            <div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Salvar</button>
+                <button class="btn btn-lg btn-primary btn-block btn btn-warning" type="reset">Limpar</button>
+            </div>
+            <br>
+        </form> 
+        <div>
+            <a href="/">
+                <button class="btn btn-lg btn-primary btn-block btn btn-success" type="submit">Voltar</button>
+            </a>
+        </div>
+    </div>    
+
+{% endblock %}
