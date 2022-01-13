@@ -1,17 +1,21 @@
 from sys import displayhook
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from core.models import Evento
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from datetime import datetime,timedelta
+from django.http.response import Http404,JsonResponse
 
 
 def agendamento(request):
     usuario=request.user
     if str(usuario) is 'AnonymousUser':
         return redirect('/')
-
-    evento=Evento.objects.filter(usuario=usuario)
+    data_atual=datetime.now()
+    #1 evento=Evento.objects.filter(usuario=usuario, data_evento__gt=data_atual)  #data_evento__gt(maior), data_evento__lt(menor)
+    evento=Evento.objects.filter(usuario=usuario) #2
     usuario=str(usuario).capitalize
 
     dados={'eventos':evento,'usuario':usuario}
@@ -37,14 +41,14 @@ def evento_submit(request):
         local=request.POST.get('local')
         usuario=request.user
         id_evento=request.POST.get("id_evento")
-        evento=Evento.objects.get(id=id_evento)
-        if id_evento and evento.usuario==usuario:
+        # evento=Evento.objects.get(id=id_evento)
+        if id_evento:
             try:            
                 Evento.objects.filter(id=id_evento).update(titulo=titulo,
                                                             data_evento=data_evento,
                                                             descricao=descricao)
                 
-            except ConnectionRefusedError:
+            except Exception:
                 messages.error(request,'Falha na solicitação.')
             
         else:
@@ -53,7 +57,7 @@ def evento_submit(request):
                                             data_evento=data_evento,
                                             descricao=descricao,
                                             usuario=usuario,local=local)
-            except ConnectionRefusedError:
+            except Exception:
                 messages.error(request,'Falha na solicitação.')
                 return redirect('agenda/evento')        
 
@@ -72,7 +76,11 @@ def delete_evento(request,id_evento):
 def titulo(resquest,id):
     print(id)
     usuario=resquest.user
-    consulta=Evento.objects.get(id=id)
+    try:
+        consulta=Evento.objects.get(id=id)
+    except Exception:
+        raise Http404()
+
     print(consulta)
     usuario=str(usuario).capitalize
 
@@ -102,3 +110,10 @@ def submit_login(request):
 def logout_user(request):
     logout(request)
     return redirect('/')
+
+
+@login_required(login_url='login/')
+def json_lista_eventos(request):
+    usuario=request.user
+    evento=Evento.objects.filter(usuario=usuario).values('id','titulo')
+    return JsonResponse(list(evento),safe=False)

@@ -30,5 +30,6 @@ urlpatterns = [
     path('login/',views.login_user),
     path('login/submit',views.submit_login),
     path('logout',views.logout_user),
-    path('agenda/evento/submit',views.evento_submit)
+    path('agenda/evento/submit',views.evento_submit),
+    path('agenda/lista/',views.json_lista_eventos)
 ]

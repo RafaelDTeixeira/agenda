@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.db.models.fields import DateTimeField
 from django.contrib.auth.models import User
@@ -20,4 +21,7 @@ class Evento(models.Model):
         return self.data_evento.strftime('%d/%m/%y %H:%M')
     def get_data_form_evento(self):
         return self.data_evento.strftime('%Y-%m-%dT%H:%M') # Padrão input html datetime-local
+    def get_evento_atrasado(self):
+        if self.data_evento < datetime.now():
+            return True
 
