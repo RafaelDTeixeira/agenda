@@ -23,8 +23,9 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('agenda/', views.agendamento,name='agendamento'),
-    path('agenda/titulo/<titulo_evento>/', views.titulo,name='titulo'),
+    path('agenda/titulo/<int:id>/', views.titulo,name='titulo'),
     path('agenda/evento/',views.evento),
+    path('agenda/evento/delete/<int:id_evento>',views.delete_evento),
     path('',views.index,name='index'),
     path('login/',views.login_user),
     path('login/submit',views.submit_login),

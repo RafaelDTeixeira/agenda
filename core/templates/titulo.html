@@ -10,6 +10,7 @@
                 <th>Evento</th>
                 <th>Data do Evento</th>
                 <th>Descrição da atividade</th>
+                <th></th>
             </tr>
             <tr>
                 <td>
@@ -20,7 +21,19 @@
                 </td>
                 <td>
                     {{ consulta.descricao }}
-                </td>                
+                </td> 
+                <td>
+                    {{ consulta.local }}
+                </td>                 
             </tr> 
-    </table> 
+    </table>
+    <div align="center">
+        <a href="/agenda/evento/?id={{consulta.id}}">
+            <button class="btn btn-lg btn-primary btn-block btn btn-warning" type="submit">Alterar</button>
+        </a>
+        
+        <a href="/agenda/evento/delete/{{consulta.id}}">
+            <button class="btn btn-lg btn-primary btn-block btn btn-danger" type="submit">Excluir</button>
+        </a> 
+    </div>  
     {% endblock %}

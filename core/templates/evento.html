@@ -8,12 +8,14 @@
     <div align="center">
         <form action="submit" style="width: 35%;" method="post">{% csrf_token %}
             <label class="sr-only">Título</label>
-            <input type="text" name="titulo" class="form-control" placeholder="titulo" required autofocus>
+            <input type="text" name="titulo" class="form-control" placeholder="titulo" required autofocus value="{{ dados.titulo }}" >
             <label class="sr-only">Data do evento</label>
-            <input type="datetime-local" name="data_evento" id="data_evento" class="form-control" placeholder="Data do evento" required>
+            <input type="datetime-local" name="data_evento" id="data_evento" class="form-control" placeholder="Data do evento" required value="{{ dados.get_data_form_evento }}">
+            <label class="sr-only">Local</label>
+            <input type="text" name="local" class="form-control" placeholder="local" required autofocus value="{{ dados.local }}">
             <div class="mb-3">
                 <label  class="form-label">Descrição</label>
-                <textarea class="form-control" name="descricao" id="descricao" rows="3"></textarea>
+                <textarea class="form-control" name="descricao" id="descricao" rows="3">{{ dados.descricao }}</textarea>
             </div>
             <br>
             <div>

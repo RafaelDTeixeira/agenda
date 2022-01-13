@@ -6,43 +6,62 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
 
-def agendamento(resquest):
-    usuario=resquest.user
+def agendamento(request):
+    usuario=request.user
     if str(usuario) is 'AnonymousUser':
         return redirect('/')
 
     evento=Evento.objects.filter(usuario=usuario)
     usuario=str(usuario).capitalize
-    
+
     dados={'eventos':evento,'usuario':usuario}
-    return render(resquest,'agenda.html',dados)
+    return render(request,'agenda.html',dados)
 
 @login_required(login_url='/login/')
-def evento(request):
+def evento(request):    
+    id_evento=request.GET.get('id')
+    if id_evento:
+        print(id_evento)
+        usuario=Evento.objects.get(id=id_evento)
+        print(usuario)
+        context={'dados':usuario}
+        return render(request,'evento.html',context)
     return render(request,'evento.html')
 
 @login_required(login_url='/login/')
 def evento_submit(request):
     if request.POST:
         titulo=request.POST.get('titulo')
-        data_evento=request.POST.get('data_evento')    
+        data_evento=request.POST.get('data_evento')
         descricao=request.POST.get('descricao')
+        local=request.POST.get('local')
         usuario=request.user
         try:
             Evento.objects.update_or_create(titulo=titulo,
                                             data_evento=data_evento,
                                             descricao=descricao,
-                                            usuario=usuario)
+                                            usuario=usuario,local=local)
         except ConnectionRefusedError:
             messages.error(request,'Falha na solicitação.')
             return redirect('agenda/evento')
-    
+
     return redirect('/agenda')
 
-def titulo(resquest,titulo_evento):
-    print(titulo_evento)
+
+@login_required(login_url='/login/')
+def delete_evento(request,id_evento):
+    usuario=request.user
+    evento=Evento.objects.get(id=id_evento) # Evento.objects.filter(id=id_evento).delete()
+
+    if usuario==evento.usuario:
+        evento.delete()
+    return redirect('/')
+
+def titulo(resquest,id):
+    print(id)
     usuario=resquest.user
-    consulta=Evento.objects.get(titulo__contains=titulo_evento)
+    consulta=Evento.objects.get(id=id)
+    print(consulta)
     usuario=str(usuario).capitalize
 
     dados={'consulta':consulta,'usuario':usuario}
@@ -71,4 +90,3 @@ def submit_login(request):
 def logout_user(request):
     logout(request)
     return redirect('/')
-    

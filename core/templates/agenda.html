@@ -11,17 +11,14 @@
             <th>Data do Evento</th>
             <th>Descrição da atividade</th>
             <th></th>
-        </tr>
+            </tr>
         {% for evento in eventos %}
         
         <tr>
-            <td><a href="titulo/{{evento.titulo}}/" target="_blank" enconding="utf-8">{{ evento.titulo }}</a></td>
+            <td><a href="titulo/{{evento.id}}/" target="_blank" enconding="utf-8">{{ evento.titulo }}</a></td>
             <td>{{ evento.get_data_evento }}</td>
             <td>{{ evento.descricao }}</td>
-            <td>
-                <button class="btn btn-lg btn-primary btn-block btn btn-warning" type="submit">Alterar</button>      
-                <!-- <button class="btn btn-lg btn-primary btn-block btn btn-danger" type="submit">Excluir</button> -->
-          </td> 
+            <td>{{ evento.local }}</td>            
         </tr>
 
         {% endfor %}    
