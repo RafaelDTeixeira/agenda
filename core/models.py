@@ -19,5 +19,5 @@ class Evento(models.Model):
     def get_data_evento(self):
         return self.data_evento.strftime('%d/%m/%y %H:%M')
     def get_data_form_evento(self):
-        return self.data_evento.strftime('%Y-%m-%d %H:%M')
+        return self.data_evento.strftime('%Y-%m-%dT%H:%M') # Padrão input html datetime-local
 

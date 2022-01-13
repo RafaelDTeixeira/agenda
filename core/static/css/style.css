@@ -19,3 +19,14 @@ body{
 #footer{
     padding-top: 50px;
 }
+#container{
+    display: inline;
+}
+.voltar{
+    float: left;
+    padding-left: 10px;
+}
+.logout{
+    float: right;
+    padding-right: 10px;
+}

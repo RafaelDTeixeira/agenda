@@ -10,13 +10,13 @@
             <th>Evento</th>
             <th>Data do Evento</th>
             <th>Descrição da atividade</th>
-            <th></th>
+            <th>Local</th>
             </tr>
         {% for evento in eventos %}
         
         <tr>
-            <td><a href="titulo/{{evento.id}}/" target="_blank" enconding="utf-8">{{ evento.titulo }}</a></td>
-            <td>{{ evento.get_data_evento }}</td>
+            <td><a href="titulo/{{evento.id}}/" enconding="utf-8">{{ evento.titulo }}</a></td>
+            <td>{{ evento.dados.get_data_form_evento }}</td>
             <td>{{ evento.descricao }}</td>
             <td>{{ evento.local }}</td>            
         </tr>

@@ -23,12 +23,11 @@
                 <button class="btn btn-lg btn-primary btn-block btn btn-warning" type="reset">Limpar</button>
             </div>
             <br>
+            <input type="number" name="id_evento" value="{{ dados.id }}" hidden>
         </form> 
-        <div>
-            <a href="/">
-                <button class="btn btn-lg btn-primary btn-block btn btn-success" type="submit">Voltar</button>
-            </a>
-        </div>
-    </div>    
+    </div>
+    {% for message in messages %}
+            <strong>Erro: </strong> {{ message }}
+        {% endfor %}   
 
 {% endblock %}

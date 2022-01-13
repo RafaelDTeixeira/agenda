@@ -36,14 +36,26 @@ def evento_submit(request):
         descricao=request.POST.get('descricao')
         local=request.POST.get('local')
         usuario=request.user
-        try:
-            Evento.objects.update_or_create(titulo=titulo,
+        id_evento=request.POST.get("id_evento")
+        evento=Evento.objects.get(id=id_evento)
+        if id_evento and evento.usuario==usuario:
+            try:            
+                Evento.objects.filter(id=id_evento).update(titulo=titulo,
+                                                            data_evento=data_evento,
+                                                            descricao=descricao)
+                
+            except ConnectionRefusedError:
+                messages.error(request,'Falha na solicitação.')
+            
+        else:
+            try:
+                Evento.objects.update_or_create(titulo=titulo,
                                             data_evento=data_evento,
                                             descricao=descricao,
                                             usuario=usuario,local=local)
-        except ConnectionRefusedError:
-            messages.error(request,'Falha na solicitação.')
-            return redirect('agenda/evento')
+            except ConnectionRefusedError:
+                messages.error(request,'Falha na solicitação.')
+                return redirect('agenda/evento')        
 
     return redirect('/agenda')
 
